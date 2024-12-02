@@ -2,12 +2,16 @@ const express = require('express');
 const app = express();
 const { sequelize } = require('./models');
 const userRoutes = require("./routes/userRoutes"); // Thay đổi đường dẫn phù hợp
+const folderRoutes = require("./routes/folderRoutes"); // Thay đổi đường dẫn phù hợp
+const setRoutes = require("./routes/setRoutes"); // Thay đổi đường dẫn phù hợp
 
 app.use(express.json());
 
 // Import routes ở đây
 // Routes
 app.use("/api/users", userRoutes);
+app.use("/api/folders", folderRoutes);
+app.use("/api/sets", setRoutes);
 
 // Middleware xử lý lỗi
 // app.use((err, req, res, next) => {

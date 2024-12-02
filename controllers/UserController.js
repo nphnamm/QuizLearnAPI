@@ -34,7 +34,7 @@ exports.getUserById = CatchAsyncError(async (req, res, next) => {
 // Tạo mới một người dùng
 exports.createUser = CatchAsyncError(async (req, res, next) => {
     try {
-        const { username, email, passwordHash } = req.body;
+        const {username, firstName,lastName, email, phoneNumber,passwordHash,avatar ,statusId} = req.body;
         
         // Mã hóa mật khẩu
         const hashedPassword = await bcrypt.hash(passwordHash, saltRounds);
@@ -42,12 +42,17 @@ exports.createUser = CatchAsyncError(async (req, res, next) => {
         // Tạo người dùng với mật khẩu đã mã hóa
         const newUser = await User.create({
             username,
+            firstName,
+            lastName,
+            phoneNumber,
             email,
+            avatar,
+            statusId,
             passwordHash: hashedPassword,
         });
 
         res.status(201).json({ success: true, user: newUser });
-    } catch (error) {
+    } catch (error) { 
         console.log(error);
         return next(new ErrorHandler(error.message || "Internal Server Error", error.statusCode || 500));
     }
