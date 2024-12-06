@@ -18,11 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       // LearningProgress belongs to a Card
       LearningProgress.belongsTo(models.Card, { foreignKey: 'cardId', as: 'card' });
 
-      // LearningProgress belongs to a Question (if the cards are question-based)
-      LearningProgress.belongsTo(models.Question, { foreignKey: 'questionId', as: 'question' });
-
-      // LearningProgress belongs to an Option (selected answer)
-      LearningProgress.belongsTo(models.Option, { foreignKey: 'selectedOptionId', as: 'selectedOption' });
     }
   }
 
@@ -54,20 +49,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       index: true, // Index foreign key for better performance
     },
-    questionId: {
-      type: DataTypes.INTEGER,
-      allowNull: true, // Not required if cards are not based on questions
-      references: {
-        model: 'Questions',
-        key: 'id',
-      },
-      index: true, // Index foreign key for better performance
-    },
-    selectedOptionId: {
+    selectedCardId: {
       type: DataTypes.INTEGER,
       allowNull: true, // Not required if the card is not multiple choice
       references: {
-        model: 'Options',
+        model: 'Cards',
         key: 'id',
       },
       index: true, // Index foreign key for better performance

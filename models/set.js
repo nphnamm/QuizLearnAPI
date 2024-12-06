@@ -16,9 +16,6 @@ module.exports = (sequelize, DataTypes) => {
        // Set có nhiều Card
        Set.hasMany(models.Card, { foreignKey: 'setId', as: 'cards' });
        
-       // Set có nhiều Quiz
-       Set.hasMany(models.Quiz, { foreignKey: 'setId', as: 'quizzes' });
-       
        // Set có nhiều LearningProgress
        Set.hasMany(models.LearningProgress, { foreignKey: 'setId', as: 'learningProgress' });
 
